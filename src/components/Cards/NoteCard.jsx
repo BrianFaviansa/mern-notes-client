@@ -15,8 +15,8 @@ const NoteCard = ({
     <div className="border rounded-lg p-4 bg-white hover:shadow-xl transition-all ease-in-out">
       <div className="flex items-center justify-between">
         <div>
-          <h6 className="text-md font-medium">{title}</h6>
-          <span className="text-sm text-slate-500">{date}</span>
+          <h6 className="text-2xl font-medium">{title}</h6>
+          <span className="text-md text-slate-500">{date}</span>
         </div>
         <MdOutlinePushPin
           className={`icon-btn ${isPinned ? "text-primary" : "text-slate-300"}`}
@@ -24,10 +24,10 @@ const NoteCard = ({
         />
       </div>
 
-      <p className="text-sm text-slate-600 mt-2">{content?.slice(0, 60)}</p>
+      <p className="text-lg text-slate-600 mt-2">{content?.slice(0, 60)}</p>
 
       <div className="flex items-center justify-between mt-2">
-        <div className="text-sm text-slate-500">{tags}</div>
+        <div className="text-md text-slate-500">{tags}</div>
 
         <div className="flex items-center gap-2">
           <MdCreate
