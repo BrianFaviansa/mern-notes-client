@@ -18,7 +18,7 @@ const NoteCard = ({
         <div>
           <h6 className="text-2xl font-medium">{title}</h6>
           <span className="text-md text-slate-500">
-            {moment(date).format("Do MMM YYYY")}
+            Created At : {moment(date).format("Do MMM YYYY")}
           </span>
         </div>
         <MdOutlinePushPin

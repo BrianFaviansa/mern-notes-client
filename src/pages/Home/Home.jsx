@@ -111,6 +111,25 @@ const Home = () => {
     }
   };
 
+  //* Pin Note
+  const updateIsPinned = async (note) => {
+    const noteId = note._id;
+    try {
+      const response = await axiosInstance.put(
+        `/update-note-pinned/${noteId}`,
+        {
+          isPinned: !note.isPinned,
+        }
+      );
+      if (response.data && response.data.note) {
+        showToastMessage("Note Pin Updated Successfully");
+        getAllNotes();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleClearSearch = () => {
     setIsSearch(false);
     getAllNotes();
@@ -142,7 +161,7 @@ const Home = () => {
                 isPinned={note.isPinned}
                 onEdit={() => handleEdit(note)}
                 onDelete={() => deleteNote(note)}
-                onPinNote={() => {}}
+                onPinNote={() => updateIsPinned(note)}
               />
             ))}
           </div>

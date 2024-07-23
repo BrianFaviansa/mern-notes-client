@@ -9,7 +9,7 @@ const AddEditNotes = ({ noteData, type, onClose, getAllNotes, showToastMessage }
   const [tags, setTags] = useState(noteData?.tags || []);
   const [error, setError] = useState(null);
 
-  // Add note
+  //* Add note
   const addNewNote = async () => {
     try {
       const response = await axiosInstance.post("/add-note", {
@@ -33,7 +33,7 @@ const AddEditNotes = ({ noteData, type, onClose, getAllNotes, showToastMessage }
     }
   };
 
-  // Edit note
+  //* Edit note
   const editNote = async () => {
     const noteId = noteData._id;
     try {
