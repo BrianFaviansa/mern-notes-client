@@ -27,12 +27,12 @@ const NoteCard = ({
         />
       </div>
 
-      <p className="text-lg text-black mt-2">{content?.slice(0, 60)}</p>
+      <p className="text-lg text-black mt-2">{content?.slice(0, 100)}</p>
 
       <div className="flex items-center justify-between mt-2">
         <div className="text-sm text-slate-600 mt-4">
           {tags.map((item, index) => (
-            <span key={index} className="bg-slate-200 inline-block mx-1 py-1 px-2 rounded-md">
+            <span key={index} className="bg-slate-100 inline-block mx-1 py-1 px-2 rounded-md">
               #{item}{" "}
             </span>
           ))}
