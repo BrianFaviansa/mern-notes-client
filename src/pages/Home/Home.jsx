@@ -6,6 +6,7 @@ import AddEditNotes from "./AddEditNotes";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "./../../utils/axiosInstance";
+import Toast from "../../components/ToastMessage/Toast";
 
 const Home = () => {
   const [openAddEditModal, setOpenAddEditModal] = useState({
@@ -14,12 +15,33 @@ const Home = () => {
     data: null,
   });
 
+  const [showToastMsg, setShowToastMessage] = useState({
+    isShown: false,
+    message: "",
+    type: "add",
+  });
+
   const [allNotes, setAllNotes] = useState([]);
   const [userInfo, setUserInfo] = useState(null);
   const navigate = useNavigate();
 
   const handleEdit = (noteData) => {
     setOpenAddEditModal({ isShown: true, data: noteData, type: "edit" });
+  };
+
+  const showToastMessage = (message, type) => {
+    setShowToastMessage({
+      isShown: true,
+      message,
+      type,
+    });
+  };
+
+  const handleCloseToast = () => {
+    setShowToastMessage({
+      isShown: false,
+      message: "",
+    });
   };
 
   //* Get User Info
@@ -46,6 +68,31 @@ const Home = () => {
       }
     } catch (error) {
       console.log("An unexpected error occurred. Please try again.");
+    }
+  };
+
+  //* Delete Note
+  const deleteNote = async (data) => {
+    const noteId = noteData._id;
+    try {
+      const response = await axiosInstance.put(`/edit-note/${noteId}`, {
+        title,
+        content,
+        tags,
+      });
+      if (response.data && response.data.note) {
+        showToastMessage("Note Updated Successfully")
+        getAllNotes();
+        onClose();
+      }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setError(error.response.data.message);
+      }
     }
   };
 
@@ -103,8 +150,15 @@ const Home = () => {
             setOpenAddEditModal({ isShown: false, type: "add", data: null });
           }}
           getAllNotes={getAllNotes}
+          showToastMessage={showToastMessage}
         />
       </Modal>
+      <Toast
+        isShown={showToastMsg.isShown}
+        message={showToastMsg.message}
+        type={showToastMsg.type}
+        onClose={handleCloseToast}
+      />
     </>
   );
 };
