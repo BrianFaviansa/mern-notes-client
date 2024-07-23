@@ -16,7 +16,7 @@ const NoteCard = ({
     <div className="border rounded-lg p-4 bg-white hover:shadow-xl transition-all ease-in-out">
       <div className="flex items-center justify-between">
         <div>
-          <h6 className="text-3xl font-medium">{title}</h6>
+          <h6 className="text-2xl font-medium">{title}</h6>
           <span className="text-md text-slate-500">
             {moment(date).format("Do MMM YYYY")}
           </span>
