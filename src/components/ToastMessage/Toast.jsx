@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { LuCheck, LuX } from "react-icons/lu";
+import { LuCheck } from "react-icons/lu";
+import { IoMdTrash } from "react-icons/io";
 
 const Toast = ({ isShown, message, type, onClose }) => {
   useEffect(() => {
@@ -20,7 +21,7 @@ const Toast = ({ isShown, message, type, onClose }) => {
       }`}
     >
       <div className="min-w-52 bg-white border shadow-2xl rounded-md flex overflow-hidden">
-        <div 
+        <div
           className={`w-1 ${isDelete ? "bg-red-500" : "bg-green-500"}`}
         ></div>
         <div className="flex items-center gap-3 py-2 px-4">
@@ -30,7 +31,7 @@ const Toast = ({ isShown, message, type, onClose }) => {
             }`}
           >
             {isDelete ? (
-              <LuX className="text-xl text-red-500" />
+              <IoMdTrash className="text-xl text-red-500" />
             ) : (
               <LuCheck className="text-xl text-green-500" />
             )}

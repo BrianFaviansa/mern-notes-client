@@ -72,18 +72,13 @@ const Home = () => {
   };
 
   //* Delete Note
-  const deleteNote = async (data) => {
+  const deleteNote = async (noteData) => {
     const noteId = noteData._id;
     try {
-      const response = await axiosInstance.put(`/edit-note/${noteId}`, {
-        title,
-        content,
-        tags,
-      });
-      if (response.data && response.data.note) {
-        showToastMessage("Note Updated Successfully")
+      const response = await axiosInstance.delete(`/delete-note/${noteId}`);
+      if (response.data && !response.data.error) {
+        showToastMessage("Note Deleted Successfully", "delete");
         getAllNotes();
-        onClose();
       }
     } catch (error) {
       if (
@@ -91,7 +86,7 @@ const Home = () => {
         error.response.data &&
         error.response.data.message
       ) {
-        setError(error.response.data.message);
+        console.log("An unexpected error occurred. Please try again.");
       }
     }
   };
@@ -116,7 +111,7 @@ const Home = () => {
               tags={note.tags}
               isPinned={note.isPinned}
               onEdit={() => handleEdit(note)}
-              onDelete={() => {}}
+              onDelete={() => deleteNote(note)}
               onPinNote={() => {}}
             />
           ))}
